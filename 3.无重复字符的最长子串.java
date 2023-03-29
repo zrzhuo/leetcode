@@ -7,7 +7,7 @@
 // @lc code=start
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-
+        return 0;
     }
 }
 // @lc code=end
