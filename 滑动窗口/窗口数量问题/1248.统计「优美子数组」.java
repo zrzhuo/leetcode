@@ -1,32 +1,30 @@
 /*
- * @lc app=leetcode.cn id=992 lang=java
+ * @lc app=leetcode.cn id=1248 lang=java
  *
- * [992] K 个不同整数的子数组
+ * [1248] 统计「优美子数组」
  */
 
 // @lc code=start
 class Solution {
-    
-    // 求nums中"不同整数个数小于k的子数组"的个数
-    int numsLessThan(int[] nums, int k) {
+
+    // 求nums中"奇数个数小于k的子数组"的个数
+    int numLessThan(int[] nums, int k) {
         // 窗口数量问题: 滑动窗口[left, right)
         int left = 0, right = 0, n = nums.length, ans = 0;
-        // 定义条件指标: 当前子数组中不同整数的个数
+        // 定义条件指标: 当前子数组中奇数的个数
         int count = 0;
-        int[] counter = new int[n + 1];
         // 滑动
         while(right < n) {
             // 移动left直到恰好满足要求
             while(left < right) {
                 if(count < k)
                     break;
-                if(--counter[nums[left]] == 0)
+                if(nums[left] % 2 == 1)
                     count--;
                 left++;
             }
-            // 累计满足要求的区间个数
             ans += right - left;
-            if(++counter[nums[right]] == 1)
+            if(nums[right] % 2 == 1)
                 count++;
             right++;
         }
@@ -34,7 +32,7 @@ class Solution {
         while(left < right) {
             if(count < k)
                 break;
-            if(--counter[nums[left]] == 0)
+            if(nums[left] % 2 == 1)
                 count--;
             left++;
         }
@@ -42,8 +40,8 @@ class Solution {
         return ans;
     }
 
-    public int subarraysWithKDistinct(int[] nums, int k) {
-        return numsLessThan(nums, k + 1) - numsLessThan(nums, k);
+    public int numberOfSubarrays(int[] nums, int k) {
+        return numLessThan(nums, k + 1) - numLessThan(nums, k);
     }
 }
 // @lc code=end
