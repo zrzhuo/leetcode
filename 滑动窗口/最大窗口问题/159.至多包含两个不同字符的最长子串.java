@@ -7,11 +7,12 @@
 // @lc code=start
 class Solution {
     public int lengthOfLongestSubstringTwoDistinct(String s) {
-        // 滑动窗口[left, right), 最大窗口问题
+        // 最大窗口问题: 滑动窗口[left, right)
         int left = 0, right = 0, n = s.length(), ans = 0;
-        // 定义条件指标
-        int count = 0; // 当前窗口中的不同字符数
+        // 定义条件指标: 当前窗口中的不同字符数
+        int count = 0;
         int[] counter = new int[128];
+        // 滑动
         while(right < n) {
             // 移动left直到恰好满足条件
             while(left < right) {

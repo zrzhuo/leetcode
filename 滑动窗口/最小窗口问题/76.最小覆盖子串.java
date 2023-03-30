@@ -10,14 +10,16 @@ class Solution {
         int n = s.length(), m = t.length();
         if(n < m)
             return "";
-        int[] counter = new int[128];
+        // 最小窗口问题: 滑动窗口[left, right)
+        int left = 0, right = 0, ansLeft = -1, ansRight = n;
+        // 定义条件指标: t中未被当前窗口覆盖的字符数量
         int count = 0;
+        int[] counter = new int[128];
         for(int i = 0; i < m; ++i) {
             if(++counter[t.charAt(i)] == 1)
                 count++;
         }
-        // 滑动窗口[left, right), 最小窗口问题
-        int left = 0, right = 0, ansLeft = -1, ansRight = n;
+        // 滑动
         while(right < n) {
              // 移动right直到恰好满足条件
             while(right < n) {
@@ -41,6 +43,7 @@ class Solution {
                 ansRight = right;
             }
         }
+        // 不存在满足条件的窗口
         if(ansLeft == -1)
             return "";
         return s.substring(ansLeft, ansRight);

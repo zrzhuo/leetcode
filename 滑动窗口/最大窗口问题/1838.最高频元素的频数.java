@@ -8,10 +8,11 @@
 class Solution {
     public int maxFrequency(int[] nums, int k) {
         Arrays.sort(nums);
-        // 滑动窗口[left, right), 最大窗口问题
+        // 最大窗口问题: 滑动窗口[left, right)
         int left = 0, right = 0, n = nums.length, ans = 0;
         // 定义条件指标: 当前窗口中所有数的和
         int sum = 0;
+        // 滑动
         while(right < n) {
             // 移动left直到恰好满足条件
             while(left < right) {

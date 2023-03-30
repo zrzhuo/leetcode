@@ -6,18 +6,14 @@
 
 // @lc code=start
 class Solution {
-    int findMax(int[] counter) {
-        int max = 0;
-        for(int i = 0; i < 26; ++i)
-            max = Math.max(max, counter[i]);
-        return max;
-    }
+    
     public int characterReplacement(String s, int k) {
-        // 指标定义
-        int[] counter = new int[26];
-        int maxCount = 0;
-        // 滑动窗口[left, right), 最大窗口问题
+        // 最大窗口问题: 滑动窗口[left, right)
         int left = 0, right = 0, n = s.length(), ans = 0;
+        // 定义条件指标: 当前窗口中最多字符的数量
+        int maxCount = 0; 
+        int[] counter = new int[26];
+        // 滑动
         while(right < n) {
             // 移动left直到恰好满足条件
             while(left < right) {
@@ -42,6 +38,14 @@ class Solution {
         if(maxCount + k >= n - left)
             ans = Math.max(ans, n - left);
         return ans;
+    }
+
+    // 寻找最多字符的个数
+    int findMax(int[] counter) {
+        int max = 0;
+        for(int i = 0; i < 26; ++i)
+            max = Math.max(max, counter[i]);
+        return max;
     }
 }
 // @lc code=end

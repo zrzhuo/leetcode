@@ -7,7 +7,7 @@
 // @lc code=start
 class Solution {
     public int totalFruit(int[] fruits) {
-        // 滑动窗口[left, right), 最大窗口问题
+        // 最大窗口问题: 滑动窗口[left, right)
         int left = 0, right = 0, n = fruits.length, ans = 0;
         // 定义条件指标: 当前窗口中的水果种类数
         int count = 0;
