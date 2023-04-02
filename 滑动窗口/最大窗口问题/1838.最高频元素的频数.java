@@ -18,14 +18,14 @@ class Solution {
             while(left < right) {
                 if(right > 0 && nums[right - 1] * (right - left) - sum <= k)
                     break;
-                sum -= nums[left];
+                sum -= nums[left]; // sum递减
                 left++;
             }
             // 移动right直到恰好不满足条件
             while(right < n) {
                 if(right > 0 && nums[right - 1] * (right - left) - sum > k)
                     break;
-                sum += nums[right];
+                sum += nums[right]; // sum递增
                 right++;
             }
             // 当前满足条件的窗口为[left, right - 1)

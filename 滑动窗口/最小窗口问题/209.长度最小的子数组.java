@@ -17,14 +17,14 @@ class Solution {
             while(right < n)  {
                 if(sum >= target)
                     break;
-                sum += nums[right];
+                sum += nums[right]; // sum递增
                 right++;
             }
             // 移动left直到恰好不满足条件
             while(left < right) {
                 if(sum < target)
                     break;
-                sum -= nums[left];
+                sum -= nums[left]; // sum递减
                 left++;
             }
             // 当前满足条件的窗口为[left-1, right)

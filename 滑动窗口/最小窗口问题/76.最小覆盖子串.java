@@ -26,7 +26,7 @@ class Solution {
                 if(count == 0)
                     break;
                 if(--counter[s.charAt(right)] == 0)
-                    count--;
+                    count--; // count递减
                 right++;
             }
             // 移动left直到恰好不满足条件
@@ -34,7 +34,7 @@ class Solution {
                 if(count > 0)
                     break;
                 if(++counter[s.charAt(left)] == 1)
-                    count++;
+                    count++; // count递增
                 left++;
             }
             // 当前满足条件的窗口为[left-1, right)

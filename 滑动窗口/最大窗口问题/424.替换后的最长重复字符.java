@@ -17,25 +17,25 @@ class Solution {
         while(right < n) {
             // 移动left直到恰好满足条件
             while(left < right) {
-                if(maxCount + k >= right - left)
+                if(right - left - maxCount <= k)
                     break;
                 --counter[s.charAt(left) - 'A'];
-                maxCount = findMax(counter);
+                maxCount = findMax(counter); // maxCount递减
                 left++;
             }
             // 移动right直到恰好不满足条件
             while(right < n) {
-                if(maxCount + k < right - left)
+                if(right - left - maxCount > k)
                     break;
                 ++counter[s.charAt(right) - 'A'];
-                maxCount = findMax(counter);
+                maxCount = findMax(counter); // maxCount递增
                 right++;
             }
             // 当前满足条件的窗口为[left, right - 1)
             ans = Math.max(ans, right - 1 - left);
         }
         // 末尾特殊处理
-        if(maxCount + k >= n - left)
+        if(right - left - maxCount <= k)
             ans = Math.max(ans, n - left);
         return ans;
     }

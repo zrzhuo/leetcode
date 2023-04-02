@@ -11,7 +11,7 @@ class Solution {
     int numLessThan(int[] nums, int k) {
         // 窗口数量问题: 滑动窗口[left, right)
         int left = 0, right = 0, n = nums.length, ans = 0;
-        // 定义条件指标: 当前子数组中奇数的个数
+        // 定义条件指标: 当前滑动窗口中奇数的个数
         int count = 0;
         // 滑动
         while(right < n) {

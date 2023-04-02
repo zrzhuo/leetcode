@@ -6,8 +6,10 @@
 
 // @lc code=start
 class Solution {
-    public int numberOfSubstrings(String s) {
-        // 窗口数量问题: 滑动窗口[left, right), ans为不同字符个数小于3的窗口的个数
+
+    // 求不同字符个数小于k的窗口的个数
+    int lessThan(String s, int k) {
+        // 窗口数量问题: 滑动窗口[left, right)
         int left = 0, right = 0, n = s.length(), ans = 0;
         // 定义条件指标: 当前窗口中不同字符的个数
         int count = 0;
@@ -16,7 +18,7 @@ class Solution {
         while(right < n) {
             // 移动left直到恰好满足要求
             while(left < right) {
-                if(count < 3)
+                if(count < k)
                     break;
                 if(--counter[s.charAt(left) - 'a'] == 0)
                     count--;
@@ -28,16 +30,21 @@ class Solution {
                 count++;
             right++;
         }
+        // 末尾处理
         while(left < right) {
-            if(count < 3)
+            if(count < k)
                 break;
             if(--counter[s.charAt(left) - 'a'] == 0)
                 count--;
             left++;
         }
         ans += right - left;
-        // 子序列总数 - ans
-        long res = 1L * (n + 1) * n / 2 - ans;
+        return ans;
+    }
+    public int numberOfSubstrings(String s) {
+        int n = s.length();
+        // 子序列总数 - 不同字符个数小于3的窗口的个数
+        long res = 1L * (n + 1) * n / 2 - lessThan(s, 3);
         return (int)res;
     }
 }
