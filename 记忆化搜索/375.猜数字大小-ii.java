@@ -4,7 +4,7 @@
  * [375] 猜数字大小 II
  */
 
-
+// 记忆化搜索
 class Solution {
     // solved[left][right]: 数字范围是[left, right]时, 确保获胜需要的最小金额 
     int[][] solved;
@@ -34,6 +34,7 @@ class Solution {
 }
 
 // @lc code=start
+// 动态规划
 class Solution {
     public int getMoneyAmount(int n) {
         int[][] dp = new int[n + 1][n + 1];

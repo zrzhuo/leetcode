@@ -4,7 +4,7 @@
  * [139] 单词拆分
  */
 
-
+// 动态规划
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
         int n = s.length();
