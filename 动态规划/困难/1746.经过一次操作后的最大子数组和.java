@@ -12,8 +12,10 @@ class Solution {
         // dp2[i]: 以nums[i]结尾, 且已经操作的最大子数组和
         int[] dp1 = new int[n];
         int[] dp2 = new int[n];
+        // 初始化
         dp1[0] = nums[0];
         dp2[0] = nums[0] * nums[0];
+        // 递推
         for (int i = 1; i < n; i++) {
             // dp1: 二种情况
             dp1[i] = Math.max(nums[i], dp1[i - 1] + nums[i]);
@@ -23,6 +25,7 @@ class Solution {
             int three = dp1[i - 1] + nums[i] * nums[i];
             dp2[i] = Math.max(one, Math.max(two, three));
         }
+        // 获取结果
         int max = 0;
         for (int i = 0; i < n; ++i) {
             max = Math.max(max, dp1[i]);
