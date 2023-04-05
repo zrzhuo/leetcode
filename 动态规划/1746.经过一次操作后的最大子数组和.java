@@ -4,7 +4,6 @@
  * [1746] 经过一次操作后的最大子数组和
  */
 
-
 // 动态规划
 class Solution {
     public int maxSumAfterOperation(int[] nums) {
@@ -15,7 +14,7 @@ class Solution {
         int[] dp2 = new int[n];
         dp1[0] = nums[0];
         dp2[0] = nums[0] * nums[0];
-        for(int i = 1; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             // dp1: 二种情况
             dp1[i] = Math.max(nums[i], dp1[i - 1] + nums[i]);
             // dp2: 三种情况
@@ -25,7 +24,7 @@ class Solution {
             dp2[i] = Math.max(one, Math.max(two, three));
         }
         int max = 0;
-        for(int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i) {
             max = Math.max(max, dp1[i]);
             max = Math.max(max, dp2[i]);
         }
@@ -43,7 +42,7 @@ class Solution {
         int dp1 = nums[0];
         int dp2 = nums[0] * nums[0];
         int max = dp2;
-        for(int i = 1; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             // dp1: 二种情况
             int temp1 = Math.max(nums[i], dp1 + nums[i]);
             // dp2: 三种情况
