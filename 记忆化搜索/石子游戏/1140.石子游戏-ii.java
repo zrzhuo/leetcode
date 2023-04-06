@@ -6,7 +6,7 @@
 
 // @lc code=start
 class Solution {
-    // solved[i][m]: 剩余数组为piles[i, n-1], 且M的值为m时, 先手玩家得到的数量与后手玩家得到的数量的差值
+    // solved[i][m]: 剩余数组为piles[i, n-1], 且M的值为m时, 先手玩家得分与后手玩家得分的差值
     int[][] solved;
     int[] prefix;  // 前缀和, 方便计算区间和
     int solving(int[] piles, int i, int m) {
@@ -14,7 +14,7 @@ class Solution {
         if(i == n)
             return 0;
         // 获取记忆
-        if(solved[i][m] != 0)
+        if(solved[i][m] != Integer.MIN_VALUE)
             return solved[i][m];
         int result = Integer.MIN_VALUE; // 由于差值可以为负数, 故应该初始化为最小整数值
         // 枚举先手玩家可以选择的x
@@ -33,6 +33,9 @@ class Solution {
     public int stoneGameII(int[] piles) {
         int n = piles.length;
         solved = new int[n][n + 1];
+        for(int i = 0; i < n; ++i) {
+            Arrays.fill(solved[i], Integer.MIN_VALUE);
+        }
         prefix = new int[n + 1];
         for(int i = 0; i < n; i++) {
             prefix[i + 1] = prefix[i] + piles[i];

@@ -9,7 +9,7 @@
 class Solution {
     public boolean stoneGame(int[] piles) {
         int n = piles.length;
-        // dp[i][j]表示，当在piles[i...j]上进行该游戏时，"先手玩家得分 - 后手玩家得分"的最大值
+        // dp[i][j]表示，当在piles[i...j]上进行该游戏时，先手玩家得分与后手玩家得分的差值
         int[][] dp = new int[n][n];
         // 初始化
         for(int i = 0; i < n; i++)

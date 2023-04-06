@@ -13,8 +13,9 @@ class Solution {
         // 获取记忆
         if(solved.containsKey(state))
             return solved.get(state);
-        // 对于某状态，其要么是“先手必赢”的，要么是“先手必输”的!!!
-        // 因此, 对于某状态, 如果其某个后继状态是"先手必输"的, 则该状态一定是"先手必赢"的
+        // 该游戏无论处于什么状态, 要么"先手必赢", 要么"先手必输", 其中:
+        // 1. 所谓先手必赢, 即当前状态下存在一种操作, 使得后继状态为先手必输
+        // 2. 所谓先手必输, 即当前状态下无论怎么操作, 所有后继状态都先手必赢
         // 枚举当前状态的所有后续状态
         for(int i = 1; i < 60; ++i) {
             long first = (state >> (i - 1)) & 1L; // 第i-1位
@@ -23,8 +24,6 @@ class Solution {
             if(first + second == 2) {
                 // 翻转两位, 形成后继状态
                 long nextState = state ^ (1L << (i - 1)) ^ (1L << i);
-                // 对于某状态, 如果其某个后继状态是"先手必输"的, 则该状态一定是"先手必赢"的
-                // 也就是说, 存在某种决策能够使当前状态变为某个"先手必输"的后继状态时, 当前状态一定是"先手必赢"的
                 if(solving(nextState) == false){
                     solved.put(state, true);
                     return true;
