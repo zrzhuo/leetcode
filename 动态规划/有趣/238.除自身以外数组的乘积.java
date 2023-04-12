@@ -40,7 +40,7 @@ class Solution {
         int prefix = 1, suffix = 1;
         for (int k = 0; k < n; k++) {
             int i = k; // i: 从0到n-1
-            int j = n - 1 - i; // j: 从n-1到0
+            int j = n - 1 - k; // j: 从n-1到0
             ans[i] *= prefix; // 前缀[0...i-1]
             ans[j] *= suffix; // 后缀[j+1...n-1]
             // 更新prefix和suffix

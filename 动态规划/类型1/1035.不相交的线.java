@@ -37,7 +37,9 @@ class Solution {
         int m = nums1.length, n = nums2.length;
         // dp[i][j]: nums1[0...i-1]和nums2[0...j-1]可以绘制的最大连线数
         int[][] dp = new int[m + 1][n + 1];
-        // (省略)初始化: dp[i][0] = 0, dp[0][j] = 0
+        // 初始化
+        dp[0][j] = 0;
+        dp[i][0] = 0; 
         // 递推
         for(int i = 1; i <= m; i++) {
             for(int j = 1; j <= n; j++) {

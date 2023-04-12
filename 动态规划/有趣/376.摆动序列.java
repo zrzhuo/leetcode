@@ -4,7 +4,6 @@
  * [376] 摆动序列
  */
 
-// @lc code=start
 class Solution {
     public int wiggleMaxLength(int[] nums) {
         int n = nums.length;
@@ -26,6 +25,24 @@ class Solution {
             }
         }
         return Math.max(dp1[n - 1], dp2[n - 1]);
+    }
+}
+
+// @lc code=start
+// 空间优化
+class Solution {
+    public int wiggleMaxLength(int[] nums) {
+        int n = nums.length;
+        // dp1[i]: nums[0...i]中, 最后的差值为正的最长摆动序列的长度
+        // dp2[i]: nums[0...i]中, 最后的差值为负的最长摆动序列的长度
+        int dp1 = 1, dp2 = 1;
+        for(int i = 1; i < n; i++) {
+            if(nums[i] > nums[i - 1])
+                dp1 = dp2 + 1;
+            else if (nums[i] < nums[i - 1])
+                dp2 = dp1 + 1;
+        }
+        return Math.max(dp1, dp2);
     }
 }
 // @lc code=end

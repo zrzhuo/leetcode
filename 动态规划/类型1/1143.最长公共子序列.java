@@ -38,7 +38,9 @@ class Solution {
         int m = text1.length(), n = text2.length();
         // dp[i][j]: text1[0...i-1]和text2[0...j-1]的最长公共子序列的长度
         int[][] dp = new int[m + 1][n + 1];
-        // (省略)初始化: dp[i][0] = 0, dp[0][j] = 0
+        // 初始化
+        dp[0][j] = 0;
+        dp[i][0] = 0;
         // 递推
         for(int i = 1; i <= m; ++i){
             for(int j = 1; j <= n; ++j){
