@@ -21,7 +21,7 @@ public class Solution {
         ListNode header = new ListNode(-1, head);
         // 找到快慢指针相遇点
         ListNode slow = header, fast = header;
-        while(slow != null && fast != null && fast.next != null) {
+        while(fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
             if(slow == fast) {

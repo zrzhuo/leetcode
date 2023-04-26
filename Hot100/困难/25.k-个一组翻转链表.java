@@ -18,26 +18,24 @@
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
         ListNode header = new ListNode(-1, head);
-        ListNode starter = header, p = header;
+        ListNode p = header;
         while(p != null) {
+            ListNode preHeader = p;
             for(int i = 0; i < k; i++) {
                 p = p.next;
                 if(p == null)
                     return header.next; // 剩余结点不足k个, 直接返回
             }
-            // 头插法, 翻转本组k个结点: pre为本组结点的前置结点, p是本组结点的最后一个结点
-            ListNode nextStarter = starter.next;
-            ListNode ender = p.next;
-            ListNode cur = starter.next;
-            starter.next = ender;
-            while(cur != ender) {
+            // 头插法, 翻转本组k个结点, preHeader为本组结点的前置结点
+            ListNode cur = preHeader.next;
+            preHeader.next = p.next;
+            p = cur; // 翻转本组k个结点后, p应该指向最后一个结点, 也就是翻转前的第一个结点
+            for(int i = 0; i < k; i++) {
                 ListNode temp = cur.next;
-                cur.next = starter.next;
-                starter.next = cur;
+                cur.next = preHeader.next;
+                preHeader.next = cur;
                 cur = temp;
             }
-            starter = nextStarter;
-            p = nextStarter;
         }
         return header.next;
     }
