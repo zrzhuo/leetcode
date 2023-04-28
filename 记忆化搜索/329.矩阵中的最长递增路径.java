@@ -34,8 +34,6 @@ class Solution {
         int max = 0;
         for(int i = 0; i < m; ++i) {
             for(int j = 0; j < n; ++j) {
-                if(solved[i][j] != 0)
-                    continue;
                 max = Math.max(max, solving(matrix, i, j));
             }
         }

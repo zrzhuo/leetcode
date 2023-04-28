@@ -40,6 +40,7 @@ class Solution {
 // @lc code=end
 
 
+// bfs
 class Solution {
     int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};    
     public int numIslands(char[][] grid) {
