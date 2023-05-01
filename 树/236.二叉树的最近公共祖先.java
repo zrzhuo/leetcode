@@ -16,6 +16,13 @@
  */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        
+    }
+}
+// @lc code=end
+
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(p == q)
             return p;
         Queue<TreeNode> que = new LinkedList<>();
@@ -42,5 +49,3 @@ class Solution {
         return tp;
     }
 }
-// @lc code=end
-
