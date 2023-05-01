@@ -21,8 +21,7 @@ class Solution {
             if(!sta.isEmpty()){
                 TreeNode cur = sta.pop();  // 栈顶为当前最左结点，该结点一定没有“未遍历的左结点”，但可能有右结点
                 res.add(cur.val); 
-                if(cur.right != null)
-                    p = cur.right;  // 该结点可能有右结点，处理
+                p = cur.right;  // 该结点可能有右结点
             }
         }
         return res;
