@@ -6,7 +6,6 @@
 
 // @lc code=start
 class Solution {
-
     int binarySearch(int[] prefix, int target) {
         int left = 0, right = prefix.length;
         while(left < right) {
