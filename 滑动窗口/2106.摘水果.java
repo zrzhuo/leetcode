@@ -4,13 +4,17 @@
  * [2106] 摘水果
  */
 
+记step为"从start出发走完区间[left, right)需要的步数", 分析可知:
+    1. left固定时, 右移right则prod不变或增大
+    2. right固定时, 右移left则prod不变或减小
+
 // @lc code=start
 class Solution {
     public int maxTotalFruits(int[][] fruits, int start, int k) {
         // 滑动窗口[left, right)
         int left = 0, right = 0, n = fruits.length, ans = 0;
-        int sum = 0;
-        // 定义条件指标: 走完当前区间[fruits[left][0], fruits[right][0] - 1]需要的步数step
+        int sum = 0; // sum记录当前窗口内的水果总数
+        // 定义条件指标: 走完当前区间[fruits[left][0], fruits[right - 1][0]]需要的步数
         // 滑动
         while(right < n) {
             // 移动left直到恰好满足要求
@@ -22,12 +26,13 @@ class Solution {
             }
             // 更新最大值
             ans = Math.max(ans, sum);
+            // 移动right
             sum += fruits[right][1];
             right++;
         }
         // 末尾特殊处理, 此时right == n
         while(left < right) {
-            if(getStep(fruits[left][0], fruits[n - 1][0], start) <= k)
+            if(getStep(fruits[left][0], fruits[right - 1][0], start) <= k)
                 break;
             sum -= fruits[left][1];
             left++;
@@ -35,11 +40,15 @@ class Solution {
         ans = Math.max(ans, sum);
         return ans;
     }
+
+    // 从start出发, 走完区间[left, right]需要的步数
     int getStep(int left, int right, int start) {
         return right - left + Math.min(Math.abs(start - left), Math.abs(right - start));
     }
 }
 // @lc code=end
+
+
 
 class Solution {
     public int maxTotalFruits(int[][] fruits, int start, int k) {

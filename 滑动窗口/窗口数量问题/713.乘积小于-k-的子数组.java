@@ -4,6 +4,11 @@
  * [713] 乘积小于 K 的子数组
  */
 
+
+记prod为窗口[left, right)中所有数的乘积. 由于nums[i]均为正整数, 故:
+    1. left固定时, 右移right则prod不变或增大
+    2. right固定时, 右移left则prod不变或减小
+
 // @lc code=start
 class Solution {
     public int numSubarrayProductLessThanK(int[] nums, int k) {
@@ -22,6 +27,7 @@ class Solution {
             }
             // 累计满足要求的区间个数
             ans += right - left;
+            // 移动right
             prod *= nums[right];
             right++;
         }
@@ -37,4 +43,6 @@ class Solution {
     }
 }
 // @lc code=end
+
+
 

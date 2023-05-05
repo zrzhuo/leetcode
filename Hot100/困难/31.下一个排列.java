@@ -18,7 +18,7 @@ class Solution {
             int idx = binarySearch(nums, s, n - 1, nums[s - 1]); // 从nums[s...n-1]中查找最后一个比nums[s-1]大的数
             swap(nums, s - 1, idx); // 交换
         }
-        reverse(nums, s, n - 1); // 再讲nums[s...n-1]进行一次翻转
+        reverse(nums, s, n - 1); // 再将nums[s...n-1]进行一次翻转
     }
 
     int binarySearch(int[] nums, int start, int stop, int target) {
