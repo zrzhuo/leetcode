@@ -5,14 +5,15 @@ import java.util.*;
  * 参考文章:
  * 1. https://leetcode.cn/problems/path-with-maximum-probability/solution/dijkstra-suan-fa-xiang-jie-by-labuladong-8zhv/
  * 2. https://leetcode.cn/problems/network-delay-time/solution/gong-shui-san-xie-yi-ti-wu-jie-wu-chong-oghpz/
+ * 3. https://leetcode.cn/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/solution/zui-duan-lu-jing-mo-ban-da-ji-he-cban-fl-gs7u/
  */
 public class Main {
     /**
      * 时间复杂度: O(V^2)
      * 空间复杂度: O(V)
-     * 适合稠密图, 即边数E接近V^2
+     * 适合稠密图, 即边数E接近V^2, 此时应选用邻接矩阵保存图
      */
-    static int[] dijkstra(int[][] graph, int start) {
+    static int[] dijkstra_dense(int[][] graph, int start) {
         int n = graph.length;
         int[] path = new int[n]; // 源点到每个节点的当前路径
         int[] dist = new int[n]; // 源点到每个结点的当前路径长度
@@ -58,9 +59,9 @@ public class Main {
     /**
      * 时间复杂度: O(E*logV)
      * 空间复杂度: O(V)
-     * 适合稀疏图, 即边数E远小于V^2
+     * 适合稀疏图, 即边数E远小于V^2, 此时应选用邻接表保存图
      */
-    static int[] dijkstra_heap(int[][] graph, int start) {
+    static int[] dijkstra_heap(List<int[]>[] graph, int start) {
         int n = graph.length;
         int[] path = new int[n]; // 源点到每个节点的当前路径
         int[] dist = new int[n]; // 源点到每个结点的当前路径长度
@@ -79,9 +80,10 @@ public class Main {
                 continue; // 该结点为已确认结点, 跳过
             visited[curr] = true; // 记录为已确认结点
             // 遍历curr的所有"未确定后续结点", 更新这些结点当前路径长度
-            for(int next = 0; next < n; next++) {
-                if(graph[curr][next]  < Integer.MAX_VALUE && !visited[next]) {
-                    int newDist = dist[curr] + graph[curr][next];
+            for(int[] node: graph[curr]) {
+                int next = node[0];
+                if(!visited[next]) {
+                    int newDist = dist[curr] + node[1];
                     if(newDist < dist[next]) {
                         path[next] = curr;
                         dist[next] = newDist; // 更新为更短的路径
@@ -124,7 +126,7 @@ public class Main {
             {inf, inf, inf, inf, 60},
             {inf, inf, inf, inf, inf}
         };
-        int[] dist = dijkstra_heap(graph, 0);
+        int[] dist = dijkstra(graph, 0);
         System.out.println(Arrays.toString(dist));
     }
 }

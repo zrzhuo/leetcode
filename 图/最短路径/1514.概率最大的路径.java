@@ -17,7 +17,7 @@ class Solution {
             graph[edges[i][0]].add(new double[]{edges[i][1], succProb[i]});
             graph[edges[i][1]].add(new double[]{edges[i][0], succProb[i]});
         }
-        // dijkstra算法(求最长路径): 堆优化
+        // dijkstra算法变形
         double[] dist = new double[n];
         boolean[] visited = new boolean[n];
         PriorityQueue<double[]> heap = new PriorityQueue<>((a, b) -> b[1] < a[1] ? -1 : 1); // 大根堆
@@ -34,10 +34,11 @@ class Solution {
             for(double[] node : graph[curr]) {
                 int next = (int) node[0];
                 if(!visited[next]) {
+                    // 根据路径长度的具体定义计算新路径
                     double newDist = dist[curr] * node[1]; // 相乘而不是相加
                     if(newDist > dist[next]) {
                         dist[next] = newDist;  // 更新为更长的路径
-                        heap.offer(new double[]{next, newDist});
+                        heap.offer(new double[]{next, newDist}); // 入堆
                     }
                 }
             }
