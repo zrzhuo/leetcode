@@ -46,8 +46,9 @@ class Solution {
                     dp[i][j] = i;
                 } else {
                     dp[i][j] = Integer.MAX_VALUE;
-                    for(int k = i + 1; k <= j - 1; k++)
+                    for(int k = i + 1; k <= j - 1; k++) {
                         dp[i][j] = Math.min(dp[i][j], k + Math.max(dp[i][k - 1], dp[k + 1][j]));
+                    }
                 }
             }
         }

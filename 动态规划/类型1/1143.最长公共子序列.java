@@ -4,7 +4,6 @@
  * [1143] 最长公共子序列
  */
 
-// @lc code=start
 // 动态规划
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
@@ -29,9 +28,8 @@ class Solution {
         return dp[m - 1][n - 1];
     }
 }
-// @lc code=end
 
-
+// @lc code=start
 // 动态规划: 统一形式
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
@@ -39,11 +37,15 @@ class Solution {
         // dp[i][j]: text1[0...i-1]和text2[0...j-1]的最长公共子序列的长度
         int[][] dp = new int[m + 1][n + 1];
         // 初始化
-        dp[0][j] = 0;
-        dp[i][0] = 0;
+        for(int i = 0; i < m; i++) {
+            dp[i][0] = 0;
+        }
+        for(int j = 0; j < n; j++) {
+            dp[0][j] = 0;
+        }
         // 递推
-        for(int i = 1; i <= m; ++i){
-            for(int j = 1; j <= n; ++j){
+        for(int i = 1; i <= m; ++i) {
+            for(int j = 1; j <= n; ++j) {
                 if(text1.charAt(i - 1) == text2.charAt(j - 1))
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 else
@@ -53,5 +55,7 @@ class Solution {
         return dp[m][n];
     }
 }
+// @lc code=end
+
 
 
