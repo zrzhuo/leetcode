@@ -17,26 +17,24 @@
  */
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode dummyHead = new ListNode();
-        ListNode p = dummyHead;
-        int carry = 0; // 进位
-        while(l1 != null || l2 != null) {
+        ListNode header = new ListNode();
+        ListNode p = header, p1 = l1, p2 = l2;
+        int carry = 0;
+        while(p1 != null || p2 != null || carry != 0) {
             int sum = carry;
-            if(l1 != null) {
-                sum += l1.val;
-                l1 = l1.next;
+            if(p1 != null) {
+                sum += p1.val;
+                p1 = p1.next;
             }
-            if(l2 != null) {
-                sum += l2.val;
-                l2 = l2.next;
+            if(p2 != null) {
+                sum += p2.val;
+                p2 = p2.next;
             }
-            carry = sum < 10 ? 0 : 1; // 更新进位
             p.next = new ListNode(sum % 10);
             p = p.next;
+            carry = sum / 10;
         }
-        if(carry > 0)
-            p.next = new ListNode(1); // 最后的进位
-        return dummyHead.next;
+        return header.next;
     }
 }
 // @lc code=end

@@ -11,6 +11,8 @@ class Solution {
         int n = nums.length;
         Arrays.sort(nums);
         for(int i = 0; i < n; i++) {
+            if(nums[i] > 0)
+                break; // 若第一个数字已经大于0，则剩余数字都大于0，无法凑成和为0的三元组
             if(i > 0 && nums[i] == nums[i - 1])
                 continue; // 为第一个数字去重
             // 双指针
@@ -20,16 +22,10 @@ class Solution {
                 // 偏小
                 if(sum < -nums[i]) {
                     left++;
-                    while(left < right && nums[left] == nums[left - 1]) {
-                        left++; // 为第二个数字去重
-                    }
                 }
                 // 偏大
                 else if(sum > -nums[i]) {
                     right--;
-                    while(left < right && nums[right] == nums[right + 1]) {
-                        right--; // 为第三个数字去重
-                    }
                 }
                 // 正好
                 else {

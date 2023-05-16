@@ -92,7 +92,7 @@ class Solution {
         // 枚举未使用的数字: 数组的前半部分[0, temp.size)是已经使用过的数
         for(int i = temp.size(); i < n; i++) {
             temp.addLast(nums[i]);
-            swap(nums, i, temp.size() - 1); // 把当前数交换到前半部分，防止后续递归再次被纳入
+            swap(nums, i, temp.size() - 1); // 把当前数交换到前半部分, 防止后续递归再次被纳入
             backTrack(nums);
             swap(nums, i, temp.size() - 1); // 还原数组
             temp.removeLast(); 

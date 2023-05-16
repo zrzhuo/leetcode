@@ -15,8 +15,27 @@
  * }
  */
 class Solution {
+    TreeNode search(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null) 
+            return null;
+        if(root == p || root == q)
+            return root;
+        // 在左右子树中搜寻p、q
+        TreeNode left = search(root.left, p, q);
+        TreeNode right = search(root.right, p, q);
+        // 左右子树分别找到了p、q，则当前节点就是最近公共节点
+        if(left != null && right != null)
+            return root;
+        // 只找到了p或q
+        if(left != null && right == null)
+            return left;
+        if(left == null && right != null)
+            return right;
+        // p和q都没有找到
+        return null;
+    }
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        
+        return search(root, p, q);
     }
 }
 // @lc code=end

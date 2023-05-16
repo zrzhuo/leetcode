@@ -20,8 +20,8 @@ class Solution {
         ListNode header = new ListNode();
         ListNode p = header, p1 = l1, p2 = l2;
         int carry = 0;
-        while(p1 != null || p2 != null) {
-            int sum = 0;
+        while(p1 != null || p2 != null || carry != 0) {
+            int sum = carry;
             if(p1 != null) {
                 sum += p1.val;
                 p1 = p1.next;
@@ -30,13 +30,10 @@ class Solution {
                 sum += p2.val;
                 p2 = p2.next;
             }
-            sum += carry;
             p.next = new ListNode(sum % 10);
             p = p.next;
             carry = sum / 10;
         }
-        if(carry > 0) 
-            p.next = new ListNode(carry);
         return header.next;
     }
 }

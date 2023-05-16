@@ -7,6 +7,24 @@
 // @lc code=start
 class Solution {
     public int lengthOfLongestSubstring(String s) {
+        int[] pre = new int[128]; // 记录字符上次出现的位置
+        Arrays.fill(pre, -1);
+        int start = 0; // 当前无重复字符子串的开始位置
+        int result = 0;
+        for(int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            start = Math.max(start, pre[ch] + 1); // 更新start, 当前无重复字符子串为s[start, i]
+            result = Math.max(result, i - start + 1);   // 更新result
+            pre[ch] = i; // 更新该字符的上次出现位置
+        }
+        return result;
+    }
+}
+// @lc code=end
+
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
         // 最大窗口问题: 滑动窗口[left, right)
         int left = 0, right = 0, n = s.length(), ans = 0;
         // 定义条件指标: 当前窗口内的不重复字符数count
@@ -39,4 +57,3 @@ class Solution {
         return ans;
     }
 }
-// @lc code=end

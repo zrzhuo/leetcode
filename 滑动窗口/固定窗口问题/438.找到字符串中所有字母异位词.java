@@ -13,7 +13,7 @@ class Solution {
             return ans;
         // 固定窗口问题
         int left = 0, right = 0;
-        int count = 0; // 未被窗口覆盖的"不同字符的个数"
+        int count = 0; // 当前窗口未覆盖的"不同字符的个数"
         int[] counter = new int[26];
         for(int i = 0; i < m; ++i) {
             if(++counter[p.charAt(i) - 'a'] == 1)

@@ -77,7 +77,7 @@ class Solution {
                     min = dist[node];
                 }
             }
-            // 所有未确定都不可达, 结束
+            // 所有未确定结点都不可达, 结束
             if(curr == -1)
                 break;
             visited[curr] = true; // 记录为已确定结点
