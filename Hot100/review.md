@@ -18,3 +18,5 @@ https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/
 https://leetcode.cn/problems/maximal-square/
 https://leetcode.cn/problems/queue-reconstruction-by-height/
 https://leetcode.cn/problems/decode-string/
+https://leetcode.cn/problems/regular-expression-matching/
+https://leetcode.cn/problems/trapping-rain-water-ii/

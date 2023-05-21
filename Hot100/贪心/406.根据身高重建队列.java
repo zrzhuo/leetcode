@@ -23,10 +23,10 @@ class Solution {
                 if(result[i] == null) {
                     // 跳过k个空位置
                     k--;
-                    if(k == -1) {
-                        result[i] = person;
-                        break;
-                    }
+                }
+                if(k == -1) {
+                    result[i] = person;
+                    break;
                 }
             }
         }
@@ -34,4 +34,3 @@ class Solution {
     }
 }
 // @lc code=end
-
