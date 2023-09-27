@@ -13,7 +13,8 @@ class Solution {
             if(i % 2 == 0)
                 result[i] = result[i / 2]; // i/2左移一位，即可得到i，故i的1个数与i/2的相等
             else
-                result[i] = result[i / 2] + 1; // i/2左移一位，末位再加1，得到i, 故i的1个数比i/2多1
+                // result[i] = result[i / 2] + 1; // i/2左移一位，末位再加1，得到i, 故i的1个数比i/2多1
+                result[i] = result[i - 1] + 1;
         }
         return result;
     }

@@ -9,7 +9,7 @@ class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
         int n = temperatures.length;
         int[] res = new int[n];
-        // 单调栈: 栈底到栈顶温度递增, 实际存的是下标
+        // 单调栈: 栈底到栈顶温度递减, 实际存的是下标
         Deque<Integer> sta = new LinkedList<>();
         for(int i = 0; i < n; i++) {
             int cur = temperatures[i];

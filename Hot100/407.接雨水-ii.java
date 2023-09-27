@@ -27,18 +27,19 @@ class Solution {
         }
         // 每次选择最矮边界进行扩散
         int result = 0;
-        int count = 0, targetCount = (m - 2) * (n - 2); // 内部位置共targetCount个
+        int count = 0, targetCount = (m - 2) * (n - 2); // 内部位置共targetCount个，用于提前退出
         while(!heap.isEmpty()) {
             int[] curr = heap.poll();
             int row = curr[0], col = curr[1];
             // 遍历该边界的“相邻内部位置”
             for(int[] d : dirs) {
                 int r = row + d[0], c = col + d[1];
-                if(r >= 0 && r < m && c >=0 && c < n && !visited[r][c]) {
-                    // 当前位置可以存储的雨水体积
-                    result += Math.max(0, height[row][col] - height[r][c]); 
-                    // 将当前位置作为新的边界
-                    height[r][c] = Math.max(height[r][c], height[row][col]); 
+                if(r >= 0 && r < m && c >= 0 && c < n && !visited[r][c]) {
+                    // 当前位置高度低于最矮边界时，该位置可以接到雨水
+                    if(height[r][c] < height[row][col]) {
+                        result += height[row][col] - height[r][c]; // 当前位置可以存储的雨水体积
+                        height[r][c] = height[row][col]; // 将当前位置作为新的边界
+                    }
                     heap.offer(new int[]{r, c, height[r][c]});
                     visited[r][c] = true;
                     // 所有内部位置计算完毕，提前退出
