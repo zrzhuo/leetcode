@@ -30,7 +30,7 @@ class Solution {
             int curr = cutPoints[j] - cutPoints[i]; // 从切割点cutPoints[k]出切割开区间(cutPoints[i], cutPoints[j]), 支付成本cutPoints[j] - cutPoints[i]
             int left = solving(cutPoints, i, k);    // 切割开区间(cutPoints[i], cutPoints[k]), 支付相应的成本
             int right = solving(cutPoints, k, j);   // 切割开区间(cutPoints[k], cutPoints[j]), 支付相应的成本
-            result = Math.min(result, curr + left + right); // 跟新最小值
+            result = Math.min(result, curr + left + right); // 更新最小值
         }
         solved[i][j] = result;
         return result;
@@ -75,7 +75,7 @@ class Solution {
                     int curr = cutPoints[j] - cutPoints[i]; // 从切割点cutPoints[k]出切割开区间(cutPoints[i], cutPoints[j]), 支付成本cutPoints[j] - cutPoints[i]
                     int left = dp[i][k];    // 切割开区间(cutPoints[i], cutPoints[k]), 支付相应的成本
                     int right = dp[k][j];   // 切割开区间(cutPoints[k], cutPoints[j]), 支付相应的成本
-                    min = Math.min(min, curr + left + right); // 跟新最小值
+                    min = Math.min(min, curr + left + right); // 更新最小值
                 }
                 dp[i][j] = min;
             }

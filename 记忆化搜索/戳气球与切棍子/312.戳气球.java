@@ -8,10 +8,10 @@
 戳破开区间(i, j)中所有气球, 分为三步:
     1. 戳破开区间(i, k)中所有气球, 获得相应的价值
     2. 戳破开区间(k, j)中所有气球, 获得相应的价值
-    3. 此时开区间(i, k)的只剩一个气球, 戳破位置k的气球, 获得val(i) * val(k) * val(j)的价值
+    3. 此时开区间(i, j)的只剩一个气球, 戳破位置k的气球, 获得val(i) * val(k) * val(j)的价值
 ------------------TENET------------------
 还原开区间(i, j)中所有气球, 分为三步:
-    1. 此时开区间(i, k)的没有任何气球, 还原位置k的气球, 获得val(i) * val(k) * val(j)的价值
+    1. 此时开区间(i, j)的没有任何气球, 还原位置k的气球, 获得val(i) * val(k) * val(j)的价值
     2. 还原开区间(i, k)中所有气球, 获得相应的价值
     3. 还原开区间(k, j)中所有气球, 获得相应的价值
 
@@ -27,7 +27,7 @@ class Solution {
         int result = 0;
         // 枚举第一个还原的气球
         for(int k = i + 1; k <= j - 1; k++) {
-            int curr = val[i] * val[k] * val[j]; // 此时开区间(i, k)的没有任何气球, 还原位置k的气球, 获得val(i) * val(k) * val(j)的价值
+            int curr = val[i] * val[k] * val[j]; // 此时开区间(i, j)的没有任何气球, 还原位置k的气球, 获得val(i) * val(k) * val(j)的价值
             int left = solving(val, i, k); // 还原开区间(i, k)中所有气球, 获得相应的价值
             int right = solving(val, k, j); // 还原开区间(k, j)中所有气球, 获得相应的价值
             result = Math.max(result, curr + left + right); // 记录最大值

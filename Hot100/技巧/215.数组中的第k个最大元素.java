@@ -15,7 +15,7 @@ class Solution {
             if(heap.size() > k)
                 heap.poll(); // 排除k+1个数中的最小数, 该数一定不是所求
         }
-        return heap.peek(); // 剩余k个数中的最大数即为所求
+        return heap.peek(); // 剩余k个数即前k个最大元素，堆顶元素即第k个最大元素
     }
 }
 // 手动实现的小根堆
@@ -38,20 +38,25 @@ class MinHeap {
         return size;
     }
 
+    int peek() {
+        return heap[0];
+    }
+
     void offer(int val) {
         if(size == capacity) 
             return; // 容量不足
         heap[size] = val; // 新增元素暂时存放在数组末尾
         size++;
         // 调整: 不断与父结点进行比较和交换
-        int idx = size - 1;
-        while(idx > 0) {
-            if(heap[idx] < heap[(idx - 1) / 2])
-                swap(idx, (idx - 1) / 2); // 当前节点较小, 上浮
+        int child = size - 1, father = (child - 1) / 2;
+        while(father >= 0) {
+            if(heap[child] < heap[father])
+                swap(child, father); // 当前节点较小, 上浮
             else
                 break;
-            idx = (idx - 1) / 2;
-        }
+            child = father;
+            father = (child - 1) / 2;
+        } 
     }
 
     int poll() {
@@ -59,23 +64,18 @@ class MinHeap {
         heap[0] = heap[size - 1]; // 用最后一个结点填充heap[0]
         size--;
         // 调整: 不断与子结点进行比较和交换
-        int idx = 0;
-        while(2 * idx + 1 < size) {
-            int left = 2 * idx + 1, right = 2 * idx + 2;
-            int smaller = left; // 左右子结点的较小者
-            if(right < size && heap[right] < heap[left])
-                smaller = right;
-            if(heap[idx] > heap[smaller])
-                swap(smaller, idx); // 当前节点较大, 下沉
-            else
+        int father = 0, left = 2 * father + 1, right = 2 * father + 2;
+        while(left < size) {
+            int smaller = (right < size && heap[right] < heap[left]) ? right : left; // 左右子结点的较小者
+            if(heap[father] > heap[smaller])
+                swap(father, smaller); // 当前节点较大, 下沉
+            else 
                 break;
-            idx = smaller;
+            father = smaller;
+            left = 2 * father + 1;
+            right = 2 * father + 2;
         }
         return val;
-    }
-
-    int peek() {
-        return heap[0];
     }
     
     private void swap(int i, int j) {
@@ -97,6 +97,6 @@ class Solution {
             if(heap.size() > k)
                 heap.poll(); // 排除k+1个数中的最小数, 该数一定不是所求
         }
-        return heap.peek(); // 剩余k个数中的最大数
+        return heap.peek(); // 剩余k个数即前k个最大元素，堆顶元素即第k个最大元素
     }
 }
