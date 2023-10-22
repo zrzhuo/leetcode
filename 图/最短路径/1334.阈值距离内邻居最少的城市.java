@@ -22,7 +22,6 @@ class Solution {
                 graph[edge[0]].add(new int[]{edge[1], edge[2]});
                 graph[edge[1]].add(new int[]{edge[0], edge[2]});
             }
-            // dijkstra_sparse
             for(int i = 0; i < n; i++) {
                 dist[i] = dijkstra_sparse(graph, i);
             }
@@ -37,7 +36,6 @@ class Solution {
                 graph[edge[0]][edge[1]] = edge[2];
                 graph[edge[1]][edge[0]] = edge[2];
             }
-            // dijkstra_dense
             for(int i = 0; i < n; i++) {
                 dist[i] = dijkstra_dense(graph, i);
             }
@@ -83,8 +81,12 @@ class Solution {
             visited[curr] = true; // 记录为已确定结点
             // 遍历curr的所有"未确定后续结点", 更新这些结点的当前路径长度
             for(int next = 0; next < n; next++) {
-                if(graph[curr][next] < INF && !visited[next])
-                    dist[next] = Math.min(dist[next], dist[curr] + graph[curr][next]); // 更新为更短的路径
+                if(graph[curr][next] < INF && !visited[next]) {
+                    int newDist = dist[curr] + graph[curr][next];
+                    if(newDist < dist[next]) {
+                        dist[next] = newDist; // 更新为更短的路径
+                    }
+                }
             }
         }
         return dist;

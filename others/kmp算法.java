@@ -42,7 +42,8 @@ class KMP {
             int now = next[i - 1];
             while (now != -1 && p.charAt(now) != p.charAt(i - 1)) {
                 now = next[now];
-                // 注意: 若统计这里的循环次数, 会发现循环总次数一定是n - 1, 故时间复杂度为O(n), 而不是O(n^2)
+                // 注意: 若统计这里的while循环次数, 会发现while循环总次数(整个外层for循环)一定是n - 1
+                // 故整体时间复杂度为O(n)
             }
             next[i] = now + 1;
         }

@@ -6,11 +6,11 @@
 
 // @lc code=start
 class Solution {
+    final static int INF = Integer.MAX_VALUE;
+    final static int[][] DIRS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     public int minimumEffortPath(int[][] heights) {
-        final int INF = Integer.MAX_VALUE;
-        final int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         int m = heights.length, n = heights[0].length;
-        // dijkstra算法变形
+        // dijkstra算法变形: 路径长度定义为"路径中相邻结点的差值的最大值"
         int[][] dist = new int[m][n];
         boolean[][] visited = new boolean[m][n];
         PriorityQueue<int[]> heap = new PriorityQueue<>((a, b) -> a[2] - b[2]); // 小根堆
@@ -27,8 +27,8 @@ class Solution {
                 continue;
             visited[row][col] = true; // 记录为已确定结点
             // 遍历curr的所有"未确定后续结点", 更新这些结点当前路径长度
-            for(int i = 0; i < 4; i++) {
-                int r = row + dirs[i][0], c = col + dirs[i][1];
+            for(int[] dir : DIRS) {
+                int r = row + dir[0], c = col + dir[1];
                 if(r >= 0 && r < m && c >= 0 && c < n && !visited[r][c]) {
                     // 根据路径长度的具体定义计算新路径
                     int newDist = Math.max(dist[row][col], Math.abs(heights[row][col] - heights[r][c]));

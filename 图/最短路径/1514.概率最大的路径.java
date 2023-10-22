@@ -17,7 +17,7 @@ class Solution {
             graph[edges[i][0]].add(new double[]{edges[i][1], succProb[i]});
             graph[edges[i][1]].add(new double[]{edges[i][0], succProb[i]});
         }
-        // dijkstra算法变形
+        // dijkstra算法变形: 路径长度定义为"路径中结点值的乘积"
         double[] dist = new double[n];
         boolean[] visited = new boolean[n];
         PriorityQueue<double[]> heap = new PriorityQueue<>((a, b) -> b[1] < a[1] ? -1 : 1); // 大根堆
