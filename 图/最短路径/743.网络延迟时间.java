@@ -41,10 +41,7 @@ class Solution {
             }
         }
         // 获取结果
-        int max = 0;
-        for(int i = 0; i < n; i++) {
-            max = Math.max(max, dist[i]);
-        }
+        int max = Arrays.stream(dist).max().getAsInt();
         return max == INF ? -1 : max;
     }
 }
@@ -84,15 +81,15 @@ class Solution {
             // 遍历curr的所有"未曾确定最短路径的后续结点", 更新这些节点当前路径长度
             for(int next = 0; next < n; next++) {
                 if(graph[curr][next] < INF && !visited[next]) {
-                    dist[next] = Math.min(dist[next], dist[curr] + graph[curr][next]); // 更新为更短的路径
+                    int newDist = dist[curr] + graph[curr][next];
+                    if(newDist < dist[next]) {
+                        dist[next] = newDist; // 更新为更短的路径
+                    }
                 }
             }
         }
         // 获取结果
-        int max = 0;
-        for(int i = 0; i < n; i++) {
-            max = Math.max(max, dist[i]);
-        }
+        int max = Arrays.stream(dist).max().getAsInt();
         return max == INF ? -1 : max;
     }
 }
