@@ -36,8 +36,8 @@ class UnionFind {
         for(int i = 0; i < n; ++i){
             father[i] = i;
             size[i] = 1; // 集合的大小为1
-            count = n; // 集合数量为n
         }
+        count = n; // 集合数量为n
     }
 
     public int find(int x){
