@@ -15,7 +15,7 @@ class Solution {
             // 此时的滑动窗口的右边界为i, 队列中的现存的所有下标j一定小于i, 
             // 1. 若nums[j] < nums[i], 则nums[j]一定不是当前窗口中的最大值, 故可以直接抛弃nums[j]
             // 2. 若nums[j] = nums[i], 因为随后会把nums[i]入队, 故也可以直接抛弃nums[j]
-            while(!que.isEmpty() && nums[i] >= nums[que.peekLast()]) {
+            while(!que.isEmpty() && nums[que.peekLast()] <= nums[i])  {
                 que.pollLast();
             }
             que.offerLast(i);
